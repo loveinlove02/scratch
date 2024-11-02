@@ -9,6 +9,11 @@ win.configure(bg='#17161b')
 
 equation = ''
 
+def clear():
+    global equation
+    equation = ''
+    lable_result.configure(text=equation)
+
 def show(value):
     global equation
     equation = equation + value
@@ -20,7 +25,7 @@ lable_result.pack()
 
 # 버튼 : C / % *
 clear_button = tk.Button(win, text='C', width=5, height=1, font='arial 30', 
-                         bd=1, fg='#ffffff', bg='#3697f5')
+                         bd=1, fg='#ffffff', bg='#3697f5', command=clear)
 clear_button.place(x=10, y=100)
 
 div_button = tk.Button(win, text='/', width=5, height=1, font='arial 30', 
