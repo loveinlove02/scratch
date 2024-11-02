@@ -19,6 +19,22 @@ def show(value):
     equation = equation + value
     lable_result.configure(text=equation)
 
+def calculate():
+    global equation
+    result = ''
+
+    if equation!='':
+        try:
+            result = eval(equation)
+            equation = str(result)
+        except:
+            result = 'error'
+            equation = ''
+    
+    lable_result.configure(text=result)
+
+
+
 # 계산 결과 레이블
 lable_result = tk.Label(win, width=25, height=2, text='', font='arial 30')
 lable_result.pack()
@@ -71,7 +87,7 @@ dot_button = tk.Button(win, text='.', width=5, height=1, font=('arial', 30, 'bol
 dot_button.place(x=290, y=500)
 
 equal_button = tk.Button(win, text='=', width=5, height=3, font=('arial', 30, 'bold'), 
-                         bd=1, fg='#fff', bg='#fe9037')
+                         bd=1, fg='#fff', bg='#fe9037', command=calculate)
 equal_button.place(x=430, y=400)
 
 win.mainloop()
