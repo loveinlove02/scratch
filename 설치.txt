@@ -1,3 +1,6 @@
+python -3.11 -m venv venv
+py -3.11 -m venv venv
+
 pip install jupyter
 pip install ipykernel
 pip install python-dotenv
