@@ -1,10 +1,7 @@
 python -3.11 -m venv venv
 py -3.11 -m venv venv
 
-pip install jupyter
-pip install ipykernel
 pip install python-dotenv
-
 pip install openai
 pip install langchain-google-genai
 pip install langchain
