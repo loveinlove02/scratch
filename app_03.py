@@ -17,17 +17,18 @@ st.title('나만의 챗봇')
 if 'messages' not in st.session_state:
     st.session_state['messages'] = []
 
-st.session_state['messages'].append(
-    ChatMessage(role='user', content='안녕?')
-)
-
-st.session_state['messages'].append(
-    ChatMessage(role='assistant', content='무엇을 도와드릴까요?')
-)
 
 def print_messages():
     for chat_message in st.session_state['messages']:
         with st.chat_message(chat_message.role):
             st.write(chat_message.content)
+
+
+def add_message(role, message):
+    st.session_state['messages'].append(
+        ChatMessage(role=role, content=message)
+    )
+
+
 
 print_messages()
