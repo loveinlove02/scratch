@@ -1,42 +1,33 @@
+import streamlit as st
+
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
+from langchain_core.messages import ChatMessage
 
 from dotenv import load_dotenv
 import os
 
-
 load_dotenv(verbose=True)
 key = os.getenv('OPENAI_API_KEY')
 
-# 1. 프롬프트
-prompt = PromptTemplate.from_template(
-    """당신은 영어를 가르치는 10년차 영어 선생님입니다.
-상황에 맞는 영어 회화를 작성해 주세요.
-양식은 [FORMAT]을 참고하여 작성해 주세요.
+st.title('나만의 챗봇')
 
-#상황:
-{question}
 
-#FORMAT:
-- 영어 회화:
-- 한글 해석:
-"""
+if 'messages' not in st.session_state:
+    st.session_state['messages'] = []
+
+st.session_state['messages'].append(
+    ChatMessage(role='user', content='안녕?')
 )
 
-# 2. LLM
-llm = ChatOpenAI(
-    api_key=key,
-    model='gpt-4o-mini'
+st.session_state['messages'].append(
+    ChatMessage(role='assistant', content='무엇을 도와드릴까요?')
 )
 
-# 3. 출력 파서
-output_parser = StrOutputParser()
+def print_messages():
+    for chat_message in st.session_state['messages']:
+        with st.chat_message(chat_message.role):
+            st.write(chat_message.content)
 
-# chain (실행기)
-chain = prompt | llm | output_parser
-
-user_input = input('질문: ')
-answer = chain.invoke({'question': user_input})
-
-print(answer)
+print_messages()
