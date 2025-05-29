@@ -25,7 +25,11 @@ def print_message():
 def add_message(role, message):
     st.session_state['messages'].append(ChatMessage(role=role, content=message))
 
-add_message(role='user', message='안녕?')
-add_message(role='assistant', message='무엇을 도와드릴까요?')
+def create_chain():
+    prompt = load_prompt('prompts/summary.yaml', encoding='utf-8')
+
+
 
 print_message()
+
+user_input = st.chat_input('궁금한 내용을 입력하세요')
