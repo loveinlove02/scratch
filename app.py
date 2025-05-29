@@ -1,23 +1,14 @@
+import streamlit as st
 
 from langchain_core.messages import ChatMessage
+from langchain_openai import ChatOpenAI
+from langchain_core.output_parsers import StrOutputParser
+from langchain_teddynote.prompts import load_prompt
 
-session_state = {}
+from dotenv import load_dotenv
+import os
 
-if 'messages' not in session_state:
-    session_state['messages'] = []
+load_dotenv()
+key = os.getenv('OPENAI_API_KEY')
 
-
-def add_messages(role, message):
-    session_state['messages'].append(ChatMessage(role=role, content=message))
-
-def print_message():
-    for chat_message in session_state['messages']:
-        print(chat_message.role, chat_message.content)
-
-# 대화 내용 추가
-add_messages('user', '안녕?')
-add_messages('assistant', '무엇을 도와드릴까요?')
-
-# 대화 내용 출력
-print_message()
-
+st.title('챗봇')
