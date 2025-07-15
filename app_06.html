@@ -6,7 +6,15 @@
     <title>Document</title>
     
     <script>
-        
+        window.onload = function() {
+            document.getElementById('signupForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // 전송 막기
+                const name = document.getElementById("name").value;
+                const id = document.getElementById("id").value;
+                const pw = document.getElementById("pw").value;
+                alert(name + " " + id + " " + pw);
+            })
+        }
     </script>
 </head>
 <body>
