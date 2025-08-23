@@ -1,20 +1,12 @@
-sentence = 'abbbca'
+from sqlalchemy import create_engine, text
+from sqlalchemy.pool import QueuePool
+from sqlalchemy.exc import SQLAlchemyError
 
-st = ''
+DATABASE_CONN = "mysql+mysqlconnector://root:1234@127.0.0.1:3306/blog_db2"
 
-for c in sentence:
-    if c!='.' and c!=' ':
-        st+=c
 
-size = len(st)
-n = size//2
+engine = create_engine(DATABASE_CONN, poolclass=QueuePool, 
+                       pool_size=10, 
+                       max_overflow=0)
 
-for i in range(0, n, 1):
-    if st[i]!=st[size-1-i]:
-        result = False
-        break
-    else:
-        result = True
-
-print(result)
-
+print(engine)
